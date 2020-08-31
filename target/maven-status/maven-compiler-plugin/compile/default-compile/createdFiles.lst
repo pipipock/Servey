@@ -1,0 +1,11 @@
+survey\pojo\survey\Choice.class
+survey\pojo\user\ResChoice.class
+survey\pojo\survey\Question.class
+survey\mapper\SurveyMapper.class
+survey\mapper\UserMapper.class
+survey\Controller\BasicController.class
+survey\pojo\survey\Survey.class
+survey\pojo\Admin.class
+survey\pojo\user\User.class
+survey\mapper\AdminMapper.class
+survey\Controller\AdminController.class
