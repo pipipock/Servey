@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>注册界面</title>
+    <title>登录界面</title>
 
     <meta
             content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -23,8 +23,6 @@
           href="${pageContext.request.contextPath}/plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/plugins/iCheck/square/blue.css">
-
-
 </head>
 
 <body class="hold-transition login-page">
@@ -34,13 +32,12 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-
-        <p id="error" class="login-box-msg">
-            <c:if test="${register_error}==null">注册系统</c:if>
-            ${register_error}
+        <p class="login-box-msg">
+            <c:if test="${modify_error}==null">修改密码系统</c:if>
+            ${modify_error}
         </p>
 
-        <form action="${pageContext.request.contextPath}/admin/register" method="post">
+        <form action="${pageContext.request.contextPath}/admin/modify" method="post">
             <div class="form-group has-feedback">
                 <input type="text" name="username" class="form-control"
                        placeholder="用户名"> <span
@@ -48,12 +45,17 @@
             </div>
             <div class="form-group has-feedback">
                 <input type="password" name="password" class="form-control"
-                       placeholder="密码"> <span
+                       placeholder="旧密码"> <span
                     class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="name" name="name" class="form-control"
-                       placeholder="姓名"> <span
+                <input type="password" name="newPassword" class="form-control"
+                       placeholder="新密码"> <span
+                    class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="newPassword" class="form-control"
+                       placeholder="重新确认新密码"> <span
                     class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -62,8 +64,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-8">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
-
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">修改</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -85,29 +86,13 @@
         src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
 <script>
     $(function() {
-
-
         $('input').iCheck({
             checkboxClass : 'icheckbox_square-blue',
             radioClass : 'iradio_square-blue',
             increaseArea : '20%' // optional
         });
-
-        $("input[name='username']").blur(function () {
-            if($("input[name='username']").val()!=""){
-                $.post("${pageContext.request.contextPath}/admin/checkUsername",
-                    {username: $("input[name='username']").val()},
-                    function (data) {
-                        $("#error").html(data);
-                    }
-                );
-            }else{
-                $("#error").html("注册系统");
-            }
-        });
     });
 </script>
-
 </body>
 
 </html>

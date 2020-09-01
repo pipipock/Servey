@@ -10,6 +10,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
+				${admin.name}
 				<p>
 					<security:authentication property="principal.username" />
 				</p>

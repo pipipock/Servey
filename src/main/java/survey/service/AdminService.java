@@ -9,11 +9,19 @@ public interface AdminService {
 
     List<Admin> findAll();
 
-    boolean register(Admin admin);
+    void register(Admin admin);
 
-    Admin login(Admin admin);
+    void login(Admin admin);
 
     boolean checkUsername(String username);
 
-    Admin queryById(String username);
+    Admin queryByUsername(String username);
+
+    void logout(Admin admin);
+
+    Admin queryOne(Admin admin);
+
+    void modify(Admin admin);
+
+    void modifyPassword(int id, String newPassword);
 }

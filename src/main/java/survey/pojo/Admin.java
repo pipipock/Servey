@@ -5,6 +5,7 @@ public class Admin {
     private String username;
     private String password;
     private String name;
+    private boolean status;
 
     public int getId() {
         return id;
@@ -38,6 +39,14 @@ public class Admin {
         this.name = name;
     }
 
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Admin{" +
@@ -45,6 +54,7 @@ public class Admin {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

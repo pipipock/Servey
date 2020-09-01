@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import survey.mapper.AdminMapper;
 import survey.pojo.Admin;
 import survey.service.AdminService;
@@ -26,38 +27,58 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean register(Admin admin) {
-        Admin ad = queryById(admin.getUsername());
-        if(ad == null){
-            adminMapper.insert(admin);
-            return true;
-        }
-        return false;
-
-    }
-
-    @Override
-    public Admin login(Admin admin) {
-        return adminMapper.queryOne(admin);
-    }
-
-    @Override
-    public boolean checkUsername(String username) {
-        return queryById(username) != null;
-    }
-
-    @Override
-    public Admin queryById(String username) {
-
-        Admin admin = new Admin();
-        admin.setUsername(username);
-
+    public Admin queryOne(Admin admin) {
         try{
-            System.out.println(adminMapper.queryOne(admin));
             return adminMapper.queryOne(admin);
         }catch(Exception e){
             return null;
         }
+    }
+
+    @Override
+    public void register(Admin admin) {
+        adminMapper.insert(admin);
+    }
+
+    @Override
+    public void modifyPassword(int id, String newPassword) {
+        Admin admin = new Admin();
+        System.out.println(admin);
+        admin.setId(id);
+        admin.setPassword(newPassword);
+        System.out.println(admin.getStatus());
+        modify(admin);
+    }
+
+    @Override
+    public void modify(Admin admin) {
+        adminMapper.update(admin);
+    }
+
+    @Override
+    public void login(Admin admin) {
+        adminMapper.modifyStatus(admin.getId(), true);
+        admin.setStatus(true);
+    }
+
+    @Override
+    public void logout(Admin admin) {
+        adminMapper.modifyStatus(admin.getId(), false);
+    }
+
+
+    @Override
+    public boolean checkUsername(String username) {
+        return queryByUsername(username) != null;
+    }
+
+    @Override
+    public Admin queryByUsername(String username) {
+
+        Admin admin = new Admin();
+        admin.setUsername(username);
+
+        return queryOne(admin);
     }
 
 }

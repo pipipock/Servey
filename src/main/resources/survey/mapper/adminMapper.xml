@@ -24,7 +24,20 @@
 
     </select>
 
-    <insert id="insert" parameterType="admin">
-        insert into tb_admin (id, username, password, name) value (null, #{username}, #{password}, #{name})
+    <insert id="insert" parameterType="admin" keyProperty="id">
+        insert into tb_admin (id, username, password, name, status) value (null, #{username}, #{password}, #{name}, 0)
     </insert>
+
+
+    <update id="update" parameterType="admin" keyProperty="id">
+         update tb_admin
+         <set>
+             <if test="password!=null">password=#{password}</if>
+             <if test="name!=null">name=#{name}</if>
+         </set>
+         where id=#{id}
+    </update>
+    <update id="modifyStatus">
+        update tb_admin set status = #{arg1} where id = #{arg0}
+    </update>
 </mapper>
